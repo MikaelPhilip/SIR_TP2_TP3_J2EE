@@ -12,6 +12,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+/**
+ * Entity qui représente une personne dans notre BDD/Application
+ * @author PHILIP Mikael JELASSI Seifeddine
+ */
 @NamedQuery(name="Person.findAll", query="Select s from Person s") //Declaration requete nommée
 @Entity
 public class Person {

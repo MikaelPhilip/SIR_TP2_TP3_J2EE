@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Test for servlet 2
+ * Second classe de test des servlet, ici on manipule le post
  * @author 12000209
  *
  */

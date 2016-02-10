@@ -3,10 +3,14 @@ package domain;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+/**
+ * Entity qui représente un objet electronique dans notre BDD/application
+ * @author PHILIP Mikael JELASSI Seifeddine
+ */
 @Entity
 public class ElectronicDevice extends SmartDevice{
 	
-	//Liste des variables/attributs
+	//Liste des variables/attributs (Ce qui est en commentaire est plus utile depuis l'heritage de SmartDevice)
 	//private Long id; //id
 		
 	//private String name; //nom Model
@@ -18,9 +22,7 @@ public class ElectronicDevice extends SmartDevice{
 
 	/**
 	 * Constructeur
-	 * @param id
-	 * @param name
-	 * @param elecCosume
+	 * @param Person p : personne qui possede ce device
 	 */
 	public ElectronicDevice(Person p) {
 		super();
@@ -28,7 +30,7 @@ public class ElectronicDevice extends SmartDevice{
 	}
 
 	/**
-	 * constructeur simple
+	 * Constructeur simple
 	 */
 	public ElectronicDevice() {
 		super();

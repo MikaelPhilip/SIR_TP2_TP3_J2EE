@@ -10,17 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Test for servlet 1
- * @author 12000209
+ * Fichier de test pour verifier et comprendre le fonctionement d'un servlet
+ * @author PHILIP Mikael JELASSI Seifeddine
  *
  */
 @WebServlet(name="mytest",
 urlPatterns={"/myurl"})
 public class MyServlet extends HttpServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5931952924171092053L;
 
 	@Override

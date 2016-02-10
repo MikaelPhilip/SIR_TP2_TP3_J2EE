@@ -5,15 +5,14 @@ import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Entity qui reprï¿½sente un chauffage
- * @author 12000209
- *
+ * Entity qui représente un chauffage dans notre BDD/application
+ * @author PHILIP Mikael JELASSI Seifeddine
  */
 @Entity
 @XmlRootElement
 public class Heater extends SmartDevice{
 	
-	//Liste des variables/attributs
+	//Liste des variables/attributs (Ce qui est en commentaire est plus utile depuis l'heritage de SmartDevice)
 	//private Long id; //id
 			
 	//private String name; //nom Model
@@ -23,15 +22,13 @@ public class Heater extends SmartDevice{
 	private Home home; //maison ou est rattaché le chauffage
 	
 	/**
-	 * Constructeur par dï¿½fault
+	 * Constructeur par défault
 	 */
 	public Heater(){}
 
 	/**
 	 * Constructeur avec param
-	 * @param id
-	 * @param modelName
-	 * @param elecCosume
+	 * @param home represente la maison où se trouve le chauffage
 	 */
 	public Heater(Home home) {
 		super();
@@ -39,7 +36,7 @@ public class Heater extends SmartDevice{
 	}
 
 	/*Accesseurs pour les variables (indispenbles pour que se soit interpreté comme des attributs*/
-	/**@Id
+	/*@Id
     @GeneratedValue
 	public Long getId() {
 		return id;
@@ -63,7 +60,7 @@ public class Heater extends SmartDevice{
 
 	public void setElecCosume(int elecCosume) {
 		ElecCosume = elecCosume;
-	}**/
+	}*/
 
 	@ManyToOne
 	public Home getHome() {

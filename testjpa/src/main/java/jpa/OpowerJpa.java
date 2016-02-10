@@ -19,7 +19,7 @@ import domain.Person;
 
 /**
  * Classe couche BDD opower, contient les méthodes pour utiliser la bdd avec le servlet
- * @author 12000209
+ * @author PHILIP Mikael JELASSI Seifeddine
  */
 public class OpowerJpa {
 	EntityManagerFactory factory;
@@ -27,7 +27,7 @@ public class OpowerJpa {
 	EntityTransaction tx;
 	
 	/**
-	 * Call when server is launch
+	 * Methode appellée quand le serveur servlet démarre
 	 */
 	public void init(){
 		factory = Persistence
@@ -38,7 +38,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Get person on BDD
+	 * Methode pour récuperer les personnes dans la BDD
 	 * @return
 	 */
 	public List<Person> ListOfPersonne(){
@@ -51,7 +51,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Get heaters on BDD
+	 * Methode pour récuperer les chauffages dans la BDD
 	 * @return
 	 */
 	public List<Heater> ListOfHeaters(){
@@ -64,7 +64,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Get ElectronicDevice on BDD
+	 * Methode pour récuperer les objets electroniques dans la BDD
 	 * @return
 	 */
 	public List<ElectronicDevice> ListOfDevice(){
@@ -77,7 +77,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Get Home on BDD
+	 * Methode pour récuperer les objets maisons dans la BDD
 	 * @return
 	 */
 	public List<Home> ListOfHome(){
@@ -90,7 +90,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Ajout chauffage
+	 * Methode pour l'ajout d'un chauffage
 	 * @param modelname
 	 * @param eleconso
 	 * @param home
@@ -107,7 +107,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Ajout maison
+	 * Methode pour l'ajout d'une maison
 	 * @param addr
 	 * @param eleconso
 	 * @param p
@@ -126,7 +126,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Ajout Electronique device
+	 * Methode pour l'ajout d'un Electronique device
 	 * @param modelname
 	 * @param eleconso
 	 * @param p
@@ -142,7 +142,7 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Ajout Person
+	 * Methode pour l'ajout d'une Personne
 	 * @param nom
 	 * @param homes
 	 * @param devices
@@ -160,13 +160,16 @@ public class OpowerJpa {
 	}
 	
 	/**
-	 * Call when end of execution
-	 */
+	 * Methode appellée quand le serveur servlet démarre
+	**/
 	public void stop(){
 		manager.close();
 		factory.close();
 	}
 	
+	/**
+	 * Methode  pour rajouter un jeu de données à utiliser pour créer/remplir la BDD d'Opower pour les tests
+	 */
 	public void addData(){
 		tx.begin();
 		try {

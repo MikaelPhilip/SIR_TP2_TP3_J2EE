@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.Path;
 
 import domain.ElectronicDevice;
 import domain.Heater;
@@ -19,33 +18,36 @@ import domain.Person;
 import jpa.OpowerJpa;
 
 /**
- * Servlet for opower
- * @author 12000209
- *
+ * Partie servlet de Opower
+ * @author PHILIP Mikael JELASSI Seifeddine
  */
 @WebServlet(name="opower",
 urlPatterns={"/opower"})
 public class OpowerServlet extends HttpServlet {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7736106884246445031L;
-	/**Jpa pour notre application**/
+	
+	/**Jpa utilisé pour notre application**/
 	private OpowerJpa jpa;
+	
+	/**
+	 * Méthode appellée au lancement de l'application (lancement du jpa)
+	 */
 	@Override
 	public void init() throws ServletException {
 		jpa= new OpowerJpa();
 		super.init();
-		jpa.init(); //Lancer le jpa (entitymanager)
-		jpa.addData(); //rajouter données de base
-
+		jpa.init(); //Lancer le jpa (donc les entitymanager)
+		//jpa.addData(); //rajouter données de base (inutile si on en a déja dans la BDD)
 	}
 	
+	/**
+	 * Méthode get pour récuperer l'nesmeble des données pour les afficher sur une page HTML
+	 */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-    	//Récupere liste des heaters
+    	//Récuperer liste des heaters,homes,persons,devices
     	List<Heater> heaters =jpa.ListOfHeaters();
     	List<Home> homes =jpa.ListOfHome();
     	List<Person> persons =jpa.ListOfPersonne();
@@ -55,6 +57,7 @@ public class OpowerServlet extends HttpServlet {
 
     	PrintWriter out = resp.getWriter();
    
+    	/*Affichage d'un contenu html qui affiche toute les données)*/
 	    out.println("<HTML>\n<BODY>\n <H1>Recapitulatif des informations</H1>\n");
 	    
 	    out.println("<H1>Chauffage</H1>\n");
@@ -92,18 +95,24 @@ public class OpowerServlet extends HttpServlet {
       
     }
 
+    /**
+     * Méthode fait pour rjaouter des élements.Note: ici on fait juste l'ajout d'une personne pour tester le fonctionnement du post
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
     	/*Version trés simplifié pour tester la communcation entre l'interface, le servlet et le jpa*/
     	String name = req.getParameter("name"); //On récupére les données du formulaire
-    	//Add person in data with JPA
+    	//Ajout d'une personne à partir des données du formulaire
     	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevice>(),  new ArrayList<Person>());
-        
-    	//ATTENTION: rendre une réponse au serveur
+      
+    	//Rendre une réponse au serveur (ici une redirection en get)
 	    resp.sendRedirect("/opower");	    
     }
     
+    /**
+     * Méthode appellée à l'arret de l'application (arret du jpa)
+     */
     @Override
     public void destroy() {
     	jpa.stop(); //Stopper le jpa (entitymanager)

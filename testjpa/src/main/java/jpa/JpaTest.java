@@ -16,20 +16,29 @@ import domain.Heater;
 import domain.Home;
 import domain.Person;
 
+/**
+ * Classe pour tester le JPA du TP2
+ *  @author PHILIP Mikael JELASSI Seifeddine
+ *
+ */
 public class JpaTest {
-	//TODO: rajouter du script pour tester nos entités
+	
 	/**
 	 * Main for test jpa (test with mvn site)
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		/*Initialiser l'entityManager*/
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("mysql"); //C'est ici qu'on choisit la config créer dans persistence.xml
 		EntityManager manager = factory.createEntityManager();
-
 		EntityTransaction tx = manager.getTransaction();
-		tx.begin();
+		
+		/*Ajout de données pour remplir la base*/
+		tx.begin(); //debut transaction
 		try {
+			
 			//Ajout d'une maison
 			Home mai = new Home();
 			mai.setAdresse("15 rue paume 44000 quelque part");
@@ -54,7 +63,7 @@ public class JpaTest {
 			h.setModelName("SesCho");
 			h.setElecCosume(1000);
 			h.setHome(mai);
-			manager.persist(h);	//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
+			manager.persist(h);		//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
 			
 			//Ajout d'un heater
 			Heater h2 = new Heater();
@@ -152,11 +161,16 @@ public class JpaTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		tx.commit();
-		/*Premier requete (question 1)
-		String s = "SELECT e FROM Heater as e where e.modelName=:name"; // :name => pramêtre 
+		tx.commit(); ///Fin et validation de la transaction
 		
-		Query q = manager.createQuery(s,Heater.class); //créer la requete ou on indique les entités manipulés
+		/*Liste des requetes pour tester JPA*/
+		/*Note: suite à l'heritage (qui nous a crée une seule table pour Heater et ElectronicDevice avec des valeur null)certaines requetes  sql marqué en dur ici ne marche plus 
+		 *cela prouve certaine limite quand on utilise pas criteria query) */
+		
+		/*Premier requete (question 1 TP2)
+		String s = "SELECT e FROM Heater as e where e.modelName=:name"; // :name => paramêtre 
+		
+		Query q = manager.createQuery(s,Heater.class); //créer la requete où on indique les entités manipulés
 		q.setParameter("name", "SesCho"); 
 		List<Heater> res = q.getResultList(); //recupérer résultat
 		
@@ -165,7 +179,7 @@ public class JpaTest {
 		System.err.println("name:"+res.get(0).getModelName()); //get(i) obtenir le i-éme résultat)
 		System.err.println("elec consume:"+res.get(0).getElecCosume()); */
 		
-		/*Seconde requete (question 2)*/
+		/*Seconde requete (question 2 TP2)*/
 		/*String s = "SELECT e FROM Home as e";
 		Query q = manager.createQuery(s,Home.class); //créer la requete ou on indique les entités manipulés
 		List<Home> res = q.getResultList(); //recupérer résultat
@@ -177,7 +191,7 @@ public class JpaTest {
 		}*/
 		
 		
-		/*Trosieme requete (question 3)*/
+		/*Trosieme requete (question 3 TP2)*/
 		/*String s = "SELECT e FROM Person as e";
 		Query q = manager.createQuery(s,Person.class); //créer la requete ou on indique les entités manipulés
 		List<Person> res = q.getResultList(); //recupérer résultat
@@ -190,7 +204,7 @@ public class JpaTest {
 			System.err.println("amis:"+res.get(i).getAmis());
 		}*/
 		
-		/*Test en requete criteria query*/
+		/*Test en requete criteria query (marche toujour car justement c'est en critéria)*/
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder(); //Création du critéria
 		CriteriaQuery<Heater> query = criteriaBuilder.createQuery(Heater.class); //Indiquer quel entité
 		Root<Heater> heater = query.from(Heater.class); //Indiquer quel table
@@ -203,7 +217,7 @@ public class JpaTest {
 		System.out.println("name:"+resu.get(0).getModelName()); //get(i) obtenir le i-éme résultat)
 		System.out.println("elec consume:"+resu.get(0).getElecCosume()); 
 		
-		/*Test requete nommé*/
+		/*Test du fonctionnement d'une requete nommé*/
 		Query q = manager.createNamedQuery("Person.findAll"); //utiliser requete nommée
 		List<Person> res = q.getResultList(); //recupérer résultat
 		
@@ -214,7 +228,8 @@ public class JpaTest {
 			System.err.println("maisons:"+res.get(i).getMaisons());
 			System.err.println("amis:"+res.get(i).getAmis());
 		}
-		//fermeture du manager
+		
+		//Fin du traitement: fermeture du manager
 		manager.close();
 		factory.close();
 	}

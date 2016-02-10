@@ -7,10 +7,14 @@ import javax.ws.rs.core.MediaType;
 
 import domain.Heater;
 
-
+/**
+ * Exemple d'utilisation de l'API Rest remplace les servlets
+ *  @author PHILIP Mikael JELASSI Seifeddine
+ *
+ */
 @Path("/site")
-
 public class SampleWebService {
+	
     @GET
     @Path("/hello")
     @Produces(MediaType.TEXT_PLAIN)

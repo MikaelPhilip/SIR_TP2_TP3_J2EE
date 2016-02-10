@@ -6,18 +6,22 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 
+/**
+ * Entity qui représente un smartDevice dans notre BDD/Application
+ * @author PHILIP Mikael JELASSI Seifeddine
+ */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class SmartDevice {
 
-	private Long id; 
+	private Long id; //id de l'entity
 	
 	private String modelName; //nom Model
 	
 	private int ElecCosume; //Conso electrique
 
 	/**
-	 * Constructeurs avec param
+	 * Constructeur avec param
 	 * @param id
 	 * @param modelName
 	 * @param elecCosume
@@ -36,6 +40,10 @@ public class SmartDevice {
 		super();
 	}
 	
+	/**
+	 * Accesseurs
+	 * @return
+	 */
 	@Id
     @GeneratedValue
 	public Long getId() {

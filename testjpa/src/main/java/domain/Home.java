@@ -10,6 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+/**
+ * Entity qui représente un objet home dans notre BDD/application
+ * @author PHILIP Mikael JELASSI Seifeddine
+ */
 @Entity
 public class Home {
 	
@@ -30,9 +34,12 @@ public class Home {
 	}
 	
 	/**
-	 * Constructeur 
+	 * Constructeur avec paramêtre
+	 * @param id
+	 * @param adresse Adresse
+	 * @param heaters Liste de schauffages de la maison
 	 */
-	public Home(Long id, String adresse, List<Heater> heaters) {
+	public Home (Long id,String adresse, List<Heater> heaters) {
 		super();
 		this.id = id;
 		this.adresse = adresse;

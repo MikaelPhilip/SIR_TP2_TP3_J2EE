@@ -1,3 +1,4 @@
+<!-- Fichier de configutaiton e l'api rest qu'on utilisera -->
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="http://java.sun.com/xml/ns/javaee"
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
@@ -10,6 +11,7 @@
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>
                 fr.istic.sir.rest
+                rest
              </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
