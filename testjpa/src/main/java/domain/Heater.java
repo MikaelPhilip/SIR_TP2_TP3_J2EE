@@ -1,18 +1,16 @@
 package domain;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Entity qui représente un chauffage
+ * Entity qui reprï¿½sente un chauffage
  * @author 12000209
  *
  */
 @Entity
+@XmlRootElement
 public class Heater extends SmartDevice{
 	
 	//Liste des variables/attributs
@@ -22,10 +20,10 @@ public class Heater extends SmartDevice{
 	
 	//private int elecCosume; //Conso electrique
 		
-	private Home home; //maison ou est rattché le chauffage
+	private Home home; //maison ou est rattaché le chauffage
 	
 	/**
-	 * Constructeur par défault
+	 * Constructeur par dï¿½fault
 	 */
 	public Heater(){}
 

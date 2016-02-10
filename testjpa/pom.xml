@@ -5,6 +5,8 @@
 	<groupId>test</groupId>
 	<artifactId>testjpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -31,11 +33,42 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.36</version>
 		</dependency>
+		<dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+             <scope>provided</scope>            
+        </dependency>
+        <dependency>
+    		<groupId>com.sun.jersey</groupId>
+    		<artifactId>jersey-servlet</artifactId>
+    		<version>1.18.3</version>
+		</dependency>
+              
+		<dependency>
+		   	<groupId>com.sun.jersey</groupId>
+		   	<artifactId>jersey-json</artifactId>
+		   	<version>1.18.3</version>
+		</dependency>
+        
 	<!-- 	<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.9.0.RELEASE</version>
 		</dependency> -->
-
 	</dependencies>
+	<build>
+		<plugins>
+	        <!-- * Start of user code for plugins -->
+	        <plugin>
+	            <groupId>org.apache.tomcat.maven</groupId>
+	            <artifactId>tomcat7-maven-plugin</artifactId>
+	            <version>2.2</version>
+	            <configuration>
+	                <path>/</path>
+	            </configuration>
+	        </plugin>
+		</plugins> 
+	</build>
 </project>
+

@@ -19,6 +19,7 @@ import domain.Person;
 public class JpaTest {
 	//TODO: rajouter du script pour tester nos entités
 	/**
+	 * Main for test jpa (test with mvn site)
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -31,13 +32,13 @@ public class JpaTest {
 		try {
 			//Ajout d'une maison
 			Home mai = new Home();
-			mai.setAdresse("15 rue paumé 44000 quelque part");
+			mai.setAdresse("15 rue paume 44000 quelque part");
 			
 			Home mai2 = new Home();
-			mai2.setAdresse("25 rue paumé 44000 quelque part");
+			mai2.setAdresse("25 rue paume 44000 quelque part");
 			
 			Home mai3 = new Home();
-			mai3.setAdresse("18 rue paumé 44000 quelque part");
+			mai3.setAdresse("18 rue paume 44000 quelque part");
 			
 			//Création d'une personne
 			Person p= new Person();
@@ -176,7 +177,7 @@ public class JpaTest {
 		}*/
 		
 		
-		/*Trosiéme requete (question 3)*/
+		/*Trosieme requete (question 3)*/
 		/*String s = "SELECT e FROM Person as e";
 		Query q = manager.createQuery(s,Person.class); //créer la requete ou on indique les entités manipulés
 		List<Person> res = q.getResultList(); //recupérer résultat
@@ -203,7 +204,7 @@ public class JpaTest {
 		System.out.println("elec consume:"+resu.get(0).getElecCosume()); 
 		
 		/*Test requete nommé*/
-		Query q = manager.createNamedQuery("Person.findAll"); //utiliser requete nommé
+		Query q = manager.createNamedQuery("Person.findAll"); //utiliser requete nommée
 		List<Person> res = q.getResultList(); //recupérer résultat
 		
 		for(int i=0; i< res.size();i++){
