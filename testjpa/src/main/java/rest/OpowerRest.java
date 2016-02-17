@@ -22,7 +22,6 @@ import jpa.OpowerJpa;
 /**
  * Exemple d'utilisation de l'API Rest remplace les servlets
  *  @author PHILIP Mikael JELASSI Seifeddine
- *
  */
 @Path("/opower")
 public class OpowerRest {
@@ -102,7 +101,7 @@ public class OpowerRest {
     }
     
     @POST
-    @Path("/heater")
+    @Path("/person")
     @Produces(MediaType.TEXT_HTML)
     public Response addHeater(@FormParam("name") String name ) throws URISyntaxException {
     	//On ferme le jpa

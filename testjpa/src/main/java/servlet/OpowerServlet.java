@@ -42,12 +42,12 @@ public class OpowerServlet extends HttpServlet {
 	}
 	
 	/**
-	 * Méthode get pour récuperer l'nesmeble des données pour les afficher sur une page HTML
+	 * Méthode get pour récuperer l'ensemble des données pour les afficher sur une page HTML
 	 */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-    	//Récuperer liste des heaters,homes,persons,devices
+    	//Récuperer liste des heaters,homes,persons,devices (appel méthodes de la couche JPA)
     	List<Heater> heaters =jpa.ListOfHeaters();
     	List<Home> homes =jpa.ListOfHome();
     	List<Person> persons =jpa.ListOfPersonne();
@@ -96,7 +96,7 @@ public class OpowerServlet extends HttpServlet {
     }
 
     /**
-     * Méthode fait pour rjaouter des élements.Note: ici on fait juste l'ajout d'une personne pour tester le fonctionnement du post
+     * Méthode fait pour rajouter des élements.Note: ici on fait juste l'ajout d'une personne pour tester le fonctionnement du post
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

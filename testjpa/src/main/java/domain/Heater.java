@@ -19,7 +19,7 @@ public class Heater extends SmartDevice{
 	
 	//private int elecCosume; //Conso electrique
 		
-	private Home home; //maison ou est rattaché le chauffage
+	private Home home; //maison où est rattachée le chauffage
 	
 	/**
 	 * Constructeur par défault
@@ -35,7 +35,7 @@ public class Heater extends SmartDevice{
 		this.home = home;
 	}
 
-	/*Accesseurs pour les variables (indispenbles pour que se soit interpreté comme des attributs*/
+	/*Accesseurs pour les variables (indispensables pour que se soit interpreté comme des attributs)*/
 	/*@Id
     @GeneratedValue
 	public Long getId() {

@@ -36,7 +36,7 @@ public class ElectronicDevice extends SmartDevice{
 		super();
 	}
 	
-	/*Accesseurs pour les varaibles (indispenbles pour que se soit interpreté comme des attributs*/
+	/*Accesseurs pour les variables (indispensables pour que se soit interpreté comme des attributs)*/
 	/*@Id
     @GeneratedValue
 	public Long getId() {

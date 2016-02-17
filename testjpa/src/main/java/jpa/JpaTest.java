@@ -17,7 +17,7 @@ import domain.Home;
 import domain.Person;
 
 /**
- * Classe pour tester le JPA du TP2
+ *  Classe pour tester le JPA du TP2
  *  @author PHILIP Mikael JELASSI Seifeddine
  *
  */
@@ -29,7 +29,7 @@ public class JpaTest {
 	 */
 	public static void main(String[] args) {
 		
-		/*Initialiser l'entityManager*/
+		/*Initialisation de l'entityManager*/
 		EntityManagerFactory factory = Persistence
 				.createEntityManagerFactory("mysql"); //C'est ici qu'on choisit la config créer dans persistence.xml
 		EntityManager manager = factory.createEntityManager();
@@ -63,28 +63,28 @@ public class JpaTest {
 			h.setModelName("SesCho");
 			h.setElecCosume(1000);
 			h.setHome(mai);
-			manager.persist(h);		//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
+			manager.persist(h);	//on indique que l'objet h est persistant: on l'enregistre dans la base de donnée (insert into)
 			
 			//Ajout d'un heater
 			Heater h2 = new Heater();
 			h2.setModelName("SaBrul");
 			h2.setElecCosume(200);
 			h2.setHome(mai);
-			manager.persist(h2);	//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
+			manager.persist(h2); 
 			
 			//Ajout d'un heater
 			Heater h3 = new Heater();
 			h3.setModelName("SeFroi");
 			h3.setElecCosume(500);
 			h3.setHome(mai2);
-			manager.persist(h3);	//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
+			manager.persist(h3);
 			
 			//Ajout d'un heater
 			Heater h4 = new Heater();
 			h4.setModelName("Sebon");
 			h4.setElecCosume(300);
 			h4.setHome(mai3);
-			manager.persist(h4);	//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
+			manager.persist(h4);
 			
 			//Completer maison
 			mai.setPersonne(p);
@@ -142,7 +142,7 @@ public class JpaTest {
 			p.setMaisons(homes);
 			manager.persist(p);
 			
-			//Completer une personne
+			//Completer une autre personne
 			ArrayList<Home> homes2= new ArrayList<Home>();
 			ArrayList<ElectronicDevice> devices2= new ArrayList<ElectronicDevice>();
 			ArrayList<Person> amis2= new ArrayList<Person>();
@@ -164,8 +164,9 @@ public class JpaTest {
 		tx.commit(); ///Fin et validation de la transaction
 		
 		/*Liste des requetes pour tester JPA*/
-		/*Note: suite à l'heritage (qui nous a crée une seule table pour Heater et ElectronicDevice avec des valeur null)certaines requetes  sql marqué en dur ici ne marche plus 
-		 *cela prouve certaine limite quand on utilise pas criteria query) */
+		
+		/*Note: suite à l'heritage (qui nous a crée une seule table pour Heater et ElectronicDevice avec des valeur null) 
+		 * certaines requetes sql marqué en dur ici ne marche plus cela prouve certaine limite quand on utilise pas criteria query) */
 		
 		/*Premier requete (question 1 TP2)
 		String s = "SELECT e FROM Heater as e where e.modelName=:name"; // :name => paramêtre 
@@ -181,7 +182,7 @@ public class JpaTest {
 		
 		/*Seconde requete (question 2 TP2)*/
 		/*String s = "SELECT e FROM Home as e";
-		Query q = manager.createQuery(s,Home.class); //créer la requete ou on indique les entités manipulés
+		Query q = manager.createQuery(s,Home.class); //créer la requete où on indique les entités manipulés
 		List<Home> res = q.getResultList(); //recupérer résultat
 		
 		for(int i=0; i< res.size();i++){
@@ -204,26 +205,26 @@ public class JpaTest {
 			System.err.println("amis:"+res.get(i).getAmis());
 		}*/
 		
-		/*Test en requete criteria query (marche toujour car justement c'est en critéria)*/
+		/*Test en requete criteria query (marche toujours car justement c'est en critéria: s'adapte à la strucutre de la BDD)*/
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder(); //Création du critéria
 		CriteriaQuery<Heater> query = criteriaBuilder.createQuery(Heater.class); //Indiquer quel entité
 		Root<Heater> heater = query.from(Heater.class); //Indiquer quel table
-		query.select(heater); //ce qu'on fait
-		TypedQuery<Heater> req = manager.createQuery(query); //créer la requete
-		List<Heater> resu = req.getResultList(); //la lancer
+		query.select(heater); //Ce qu'on fait
+		TypedQuery<Heater> req = manager.createQuery(query); //Créer la requete
+		List<Heater> resu = req.getResultList(); //La lancer
 		
 		System.out.println("taille:" + resu.size());
 		System.out.println("id:" +resu.get(0).getId());
-		System.out.println("name:"+resu.get(0).getModelName()); //get(i) obtenir le i-éme résultat)
+		System.out.println("name:"+resu.get(0).getModelName()); //Get(i) obtenir le i-éme résultat)
 		System.out.println("elec consume:"+resu.get(0).getElecCosume()); 
 		
 		/*Test du fonctionnement d'une requete nommé*/
-		Query q = manager.createNamedQuery("Person.findAll"); //utiliser requete nommée
-		List<Person> res = q.getResultList(); //recupérer résultat
+		Query q = manager.createNamedQuery("Person.findAll"); //Utiliser requete nommée
+		List<Person> res = q.getResultList(); //Recupérer résultat
 		
 		for(int i=0; i< res.size();i++){
 			System.err.println("id:" +res.get(i).getId());
-			System.err.println("nom:"+res.get(i).getNom()); //get(i) obtenir le i-éme résultat)
+			System.err.println("nom:"+res.get(i).getNom()); //Get(i) obtenir le i-éme résultat)
 			System.err.println("services:"+res.get(i).getDevices());
 			System.err.println("maisons:"+res.get(i).getMaisons());
 			System.err.println("amis:"+res.get(i).getAmis());

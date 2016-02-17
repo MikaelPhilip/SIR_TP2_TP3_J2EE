@@ -20,12 +20,13 @@ public class Home {
 	//Liste des variables/attributs
 	private Long id; //id
 	
-	private String adresse; //id
+	private String adresse; //adresse
 	
 	private List<Heater> heaters = new ArrayList<Heater>(); //Chauffages
 
 	//Personne qui possede la maison
 	private Person personne;
+	
 	/**
 	 * Constructeur basique
 	 */

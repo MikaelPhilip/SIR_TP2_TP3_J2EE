@@ -17,15 +17,11 @@ import javax.servlet.http.HttpServletResponse;
 urlPatterns={"/UserInfo"})
 public class UserInfo extends HttpServlet {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3797748805200443458L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-            
-      resp.sendRedirect("index.html");
+            throws ServletException, IOException {  
+      resp.sendRedirect("myForm.html");
         
     }
 	
@@ -33,7 +29,7 @@ public void doPost(HttpServletRequest request,
                     HttpServletResponse response)
      throws ServletException, IOException {
     response.setContentType("text/html");
-
+    
     PrintWriter out = response.getWriter();
 
     
@@ -48,5 +44,5 @@ public void doPost(HttpServletRequest request,
                 + request.getParameter("age") + "\n" +
                 "</UL>\n" +                
         "</BODY></HTML>");
-}
+	}
 }

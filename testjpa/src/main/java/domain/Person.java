@@ -25,11 +25,11 @@ public class Person {
 	
 	private String nom; //nom 
 	
-	private List<Home> maisons;
+	private List<Home> maisons; //Liste des maisons
 	
-	private List<ElectronicDevice> devices;
+	private List<ElectronicDevice> devices; //Liste des devices
 	
-	private List<Person> amis;
+	private List<Person> amis; //Liste des amis
 	
 	/**
 	 * Constructeur
@@ -56,7 +56,6 @@ public class Person {
 	}
 
 	//Accesseur
-	
 	@Id
     @GeneratedValue
     public Long getId() {
@@ -95,7 +94,7 @@ public class Person {
 	}
 
 	@JoinTable(name = "amis", joinColumns = { @JoinColumn(name = "friend", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
-													@JoinColumn(name = "friendof", referencedColumnName = "id", nullable = false)})
+					@JoinColumn(name = "friendof", referencedColumnName = "id", nullable = false)})
 	@ManyToMany
 	public List<Person> getAmis() {
 		return amis;

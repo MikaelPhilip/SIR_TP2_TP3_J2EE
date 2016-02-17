@@ -18,7 +18,7 @@ import domain.Home;
 import domain.Person;
 
 /**
- * Classe couche BDD opower, contient les méthodes pour utiliser la bdd avec le servlet
+ * Classe couche JPA opower, contient les méthodes pour utiliser la bdd avec le servlet
  * @author PHILIP Mikael JELASSI Seifeddine
  */
 public class OpowerJpa {
@@ -102,7 +102,7 @@ public class OpowerJpa {
 			h.setModelName(modelname);
 			h.setElecCosume(eleconso);
 			h.setHome(home);
-			manager.persist(h);	//on indique que l'objet h est persistant: on l'neregistre dans la base de donnée (insert into)
+			manager.persist(h);	//on indique que l'objet h est persistant: on l'enregistre dans la base de donnée (insert into)
 		tx.commit();
 	}
 	
@@ -133,11 +133,11 @@ public class OpowerJpa {
 	 */
 	public void AddElectronic(String modelname,int eleconso,Person p){
 		tx.begin();
-			ElectronicDevice el = new ElectronicDevice();
-			el.setModelName(modelname);
-			el.setElecCosume(eleconso);
-			el.setPersonne(p);
-			manager.persist(el);
+		ElectronicDevice el = new ElectronicDevice();
+		el.setModelName(modelname);
+		el.setElecCosume(eleconso);
+		el.setPersonne(p);
+		manager.persist(el);
 		tx.commit();
 	}
 	
@@ -150,12 +150,12 @@ public class OpowerJpa {
 	 */
 	public void AddPerson(String nom,ArrayList<Home> homes,ArrayList<ElectronicDevice> devices,ArrayList<Person> amis){
 		tx.begin();
-			Person p= new Person();
-			p.setNom(nom);
-			p.setDevices(devices);
-			p.setAmis(amis);
-			p.setMaisons(homes);	
-			manager.persist(p);
+		Person p= new Person();
+		p.setNom(nom);
+		p.setDevices(devices);
+		p.setAmis(amis);
+		p.setMaisons(homes);	
+		manager.persist(p);
 		tx.commit();
 	}
 	
