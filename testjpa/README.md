@@ -26,7 +26,7 @@ Dans un premier temps on a crée les entity de notre BDD (le package domain) où o
 Ensuite on a utilisé le JPA pour faire différentes choses (voir fichier JpaTest.java).
 
 --> Création de données en utilisant les Entity et le méthode de JPA:
--> Ne pas oublier de définir l'entityManager avant.
+-> Ne pas oublier de définir l'entityManager avant dans un pattern Singleton.
 -> Toute mise à jour/suppression/ajout se fait dans une transaction ( tx.begin();/tx.commit();).
 
 --> On a fait des requete classiques de selection avec récupérations et affichage des données dans la BDD.

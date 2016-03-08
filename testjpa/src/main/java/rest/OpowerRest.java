@@ -27,30 +27,13 @@ import jpa.OpowerJpa;
 public class OpowerRest {
 	
 	/**Jpa utilisé pour notre application**/
-	private OpowerJpa jpa;
+	private OpowerJpa jpa= new OpowerJpa();
 	
-	/**
-	 * Méthode appellée au lancement de l'application (lancement du jpa)
-	 */
-	public void init(){
-		jpa= new OpowerJpa();
-		jpa.init(); //Lancer le jpa (donc les entitymanager)
-		//jpa.addData(); //rajouter données de base (inutile si on en a déja dans la BDD)
-	}
-	
-	/**
-     * Méthode appellée à l'arret de l'application (arret du jpa)
-     */
-    public void destroy() {
-    	jpa.stop(); //Stopper le jpa (entitymanager)
-    }
-    
     @GET
     @Path("/data")
     @Produces(MediaType.TEXT_HTML)
     public String getList() {
-    	//On initialise le jpa
-    	this.init();
+    	
     	//Récuperer liste des heaters,homes,persons,devices
     	List<Heater> heaters =jpa.ListOfHeaters();
     	List<Home> homes =jpa.ListOfHome();
@@ -59,7 +42,7 @@ public class OpowerRest {
     	
     	String resp=new String();
    
-    	/*Affichage d'un contenu html qui affiche toute les données)*/
+    	//Affichage d'un contenu html qui affiche toute les données)
     	resp+="<HTML>\n<BODY>\n <H1>Recapitulatif des informations</H1>\n";
 	    
 	    resp+=("<H1>Chauffage</H1>\n");
@@ -94,24 +77,28 @@ public class OpowerRest {
 	    	  resp+=("<p>----------------------------</p>\n");
 	    }
 	    resp+=("</BODY></HTML>");
-	    //On ferme le jpa
-    	this.destroy();
 	    return resp;
    
+    }
+    
+    @GET
+    @Path("/dataHeater")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Heater> getListHeater() {
+    	//Récuperer liste des heaters,homes,persons,devices
+    	//Récuperer liste des heaters,homes,persons,devices
+    	List<Heater> heaters =jpa.ListOfHeaters();
+	    return heaters;
     }
     
     @POST
     @Path("/person")
     @Produces(MediaType.TEXT_HTML)
     public Response addHeater(@FormParam("name") String name ) throws URISyntaxException {
-    	//On ferme le jpa
-    	this.init();	
     	/*Version trés simplifié pour tester la communcation entre l'interface, le rest et le jpa*/
     	//Ajout d'une personne à partir des données du formulaire
     	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevice>(),  new ArrayList<Person>());
     	URI targetURIForRedirection = new URI("/opower/data");
-    	//On ferme le jpa
-    	this.destroy();
     	//Rendre une réponse au serveur (ici une redirection en get)
     	return Response.seeOther(targetURIForRedirection).build();	
 	    

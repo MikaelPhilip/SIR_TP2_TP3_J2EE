@@ -3,6 +3,9 @@ package domain;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Entity qui représente un chauffage dans notre BDD/application
@@ -63,6 +66,8 @@ public class Heater extends SmartDevice{
 	}*/
 
 	@ManyToOne
+	@JsonIgnore
+	@XmlTransient
 	public Home getHome() {
 		return home;
 	}

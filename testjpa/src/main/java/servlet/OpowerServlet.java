@@ -37,7 +37,6 @@ public class OpowerServlet extends HttpServlet {
 	public void init() throws ServletException {
 		jpa= new OpowerJpa();
 		super.init();
-		jpa.init(); //Lancer le jpa (donc les entitymanager)
 		//jpa.addData(); //rajouter données de base (inutile si on en a déja dans la BDD)
 	}
 	
@@ -115,7 +114,6 @@ public class OpowerServlet extends HttpServlet {
      */
     @Override
     public void destroy() {
-    	jpa.stop(); //Stopper le jpa (entitymanager)
     	super.destroy();
     }
 }
