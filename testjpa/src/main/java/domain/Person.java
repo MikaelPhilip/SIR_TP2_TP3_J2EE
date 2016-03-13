@@ -11,6 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * Entity qui représente une personne dans notre BDD/Application
@@ -18,6 +22,7 @@ import javax.persistence.OneToMany;
  */
 @NamedQuery(name="Person.findAll", query="Select s from Person s") //Declaration requete nommée
 @Entity
+@XmlRootElement
 public class Person {
 	
 	//Liste des variables/attributs
@@ -75,6 +80,8 @@ public class Person {
 	}
 	
 	@OneToMany(mappedBy = "personne", cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	@XmlTransient
 	public List<Home> getMaisons() {
 		return maisons;
 	}
@@ -85,6 +92,8 @@ public class Person {
 	}
 
 	@OneToMany(mappedBy = "personne", cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	@XmlTransient
 	public List<ElectronicDevice> getDevices() {
 		return devices;
 	}
@@ -96,6 +105,8 @@ public class Person {
 	@JoinTable(name = "amis", joinColumns = { @JoinColumn(name = "friend", referencedColumnName = "id", nullable = false)}, inverseJoinColumns = {
 					@JoinColumn(name = "friendof", referencedColumnName = "id", nullable = false)})
 	@ManyToMany
+	@JsonIgnore
+	@XmlTransient
 	public List<Person> getAmis() {
 		return amis;
 	}

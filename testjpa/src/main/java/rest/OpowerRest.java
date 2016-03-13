@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,6 +13,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 import domain.ElectronicDevice;
 import domain.Heater;
@@ -85,19 +89,63 @@ public class OpowerRest {
     @Path("/dataHeater")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Heater> getListHeater() {
-    	//Récuperer liste des heaters,homes,persons,devices
-    	//Récuperer liste des heaters,homes,persons,devices
+    	//Récuperer liste des heaters
     	List<Heater> heaters =jpa.ListOfHeaters();
 	    return heaters;
     }
     
+    @GET
+    @Path("/dataPerson")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Person> getListPerson() {
+    	//Récuperer liste des heaters
+    	List<Person> persons =jpa.ListOfPersonne();
+	    return persons;
+    }
+    
+    /**
+     * Méthode pour rajouter une perssone en recevant les paramêtres depuis un formulaire
+     * @param name
+     * @return
+     * @throws URISyntaxException
+     */
     @POST
     @Path("/person")
     @Produces(MediaType.TEXT_HTML)
-    public Response addHeater(@FormParam("name") String name ) throws URISyntaxException {
+    public Response addPerson(@FormParam("name") String name ) throws URISyntaxException {
     	/*Version trés simplifié pour tester la communcation entre l'interface, le rest et le jpa*/
     	//Ajout d'une personne à partir des données du formulaire
     	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevice>(),  new ArrayList<Person>());
+    	URI targetURIForRedirection = new URI("/opower/data");
+    	//Rendre une réponse au serveur (ici une redirection en get)
+    	return Response.seeOther(targetURIForRedirection).build();	
+	    
+	  
+    }
+    
+    /**
+     * Méthode pour rajouter une perssone en recevant les paramêtres depuis un JSON (Sert pour un site angular d'un autre projet)
+     * @param name
+     * @return
+     * @throws URISyntaxException
+     */
+    @POST
+    @Path("/personJSON")
+    @Produces(MediaType.TEXT_HTML)
+    @Consumes(MediaType.APPLICATION_JSON) //C'est comme cela qu'il sait qu'il va recevoir du json
+    public Response addPersonJSON(String json ) throws URISyntaxException {
+    	/*Version trés simplifié pour tester la communcation entre l'interface, le rest et le jpa*/
+    	
+    	try {
+			JSONObject obj = new JSONObject(json); //On transforme notre paramêtre en object JSON
+			String name= obj.getString("name"); //On récupére un element de notre JSON
+			//Ajout d'une personne à partir des données du json
+	    	jpa.AddPerson(name, new ArrayList<Home>(), new ArrayList<ElectronicDevice>(),  new ArrayList<Person>());
+		} catch (JSONException e) {
+		
+			e.printStackTrace();
+		}
+    	
     	URI targetURIForRedirection = new URI("/opower/data");
     	//Rendre une réponse au serveur (ici une redirection en get)
     	return Response.seeOther(targetURIForRedirection).build();	

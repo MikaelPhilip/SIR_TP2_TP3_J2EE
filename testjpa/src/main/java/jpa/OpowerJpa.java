@@ -50,6 +50,15 @@ public class OpowerJpa {
 		Root<Person> person = query.from(Person.class); //Indiquer quel table
 		query.select(person); //ce qu'on fait
 		TypedQuery<Person> req = OpowerJpa.getEntityManager().createQuery(query); //créer la requete
+		/*Pour nettoyage des données (test foireux)
+		 for (Person p :(List<Person>)req.getResultList()){
+			if (p.getNom()==null){
+				OpowerJpa.getEntityManager().getTransaction().begin();
+				OpowerJpa.getEntityManager().remove(p);
+				OpowerJpa.getEntityManager().getTransaction().commit();
+			}
+		}*/
+		
 		return (List<Person>)req.getResultList(); //recupérer résultat
 	}
 	
